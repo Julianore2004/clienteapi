@@ -7,90 +7,80 @@
   <style>
     /* Reset simple */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
-
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f6fa;
-      color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        color: #333;
     }
-
-    /* ===== HEADER ===== */
+    /* Header */
     .app-header {
-      background: #ffffff;
-      border-bottom: 1px solid #e1e1e1;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+        background: #ffffff;
+        border-bottom: 1px solid #e1e1e1;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
-
     .app-title {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #222;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #2c3e50;
     }
-
-    /* NAV */
+    /* Navegación */
     .app-nav {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
     }
-
     .nav-link {
-      text-decoration: none;
-      color: #444;
-      font-weight: 500;
-      transition: color 0.3s ease;
+        text-decoration: none;
+        color: #2c3e50;
+        font-weight: 500;
+        transition: color 0.2s ease;
     }
-
     .nav-link:hover {
-      color: #007bff;
+        color: #3498db;
     }
-
-    /* BOTÓN LOGOUT */
+    /* Botón de logout */
     .btn-logout {
-      background: #dc3545;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s ease;
+        background: #e74c3c;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.2s ease;
     }
-
     .btn-logout:hover {
-      background: #a71d2a;
+        background: #c0392b;
     }
-
-    /* RESPONSIVE */
+    /* Responsive */
     @media (max-width: 768px) {
-      .app-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .app-nav {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        margin-top: 0.8rem;
-        gap: 0.8rem;
-      }
-
-      .btn-logout {
-        width: 100%;
-        text-align: center;
-      }
+        .app-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .app-nav {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            gap: 0.8rem;
+        }
+        .btn-logout {
+            width: 100%;
+            text-align: center;
+        }
     }
-  </style>
+</style>
+
 </head>
 <body>
   <header class="app-header">
