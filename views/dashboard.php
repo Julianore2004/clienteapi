@@ -120,18 +120,7 @@ require_once __DIR__ . '/include/header.php';
             </div>
         </div>
 
-        <!-- Información del usuario -->
-        <div class="session-info">
-            <h4><i class="fas fa-info-circle"></i> Información de la Sesión</h4>
-            <div class="session-grid">
-                <div class="session-item">
-                    <strong>ID:</strong> <?php echo $_SESSION['user_id']; ?>
-                </div>
-                <div class="session-item">
-                    <strong>Usuario:</strong> <?php echo htmlspecialchars($_SESSION['username']); ?>
-                </div>
-            </div>
-        </div>
+       
     </div>
 </div>
 
