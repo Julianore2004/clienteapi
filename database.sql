@@ -35,7 +35,7 @@ CREATE TABLE `tokens_api` (
 -- Volcado de datos para la tabla `tokens_api`
 --
 
-INSERT INTO `tokens_api` (`id_client_api`, `token`) VALUES
+INSERT INTO `tokens_api` (`token`) VALUES
 ('589e4cf1e5c2024e8d74d482b4bad2df-20251003-02'),
 ('710602c970c9f224d6f041b2984b2a0d-20251003-04'),
 ('a69e9f2a3850558dfd439bf27d27ede9-20251003-04');

@@ -1,41 +1,36 @@
 <?php
 header('Content-Type: application/json');
-require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../controllers/TokenApiController.php';
-require_once __DIR__ . '/../controllers/DocenteController.php';
 
-// Validar token
+// URL del API de Docentes (cambia por la URL real de tu API de Docentes)
+define('API_DOCENTES_URL', 'https://apidocentes.404brothers.com.pe/api_cliente/api_handler.php');
+
+// Obtener el token y la acción
 $token = $_POST['token'] ?? '';
 $action = $_GET['action'] ?? '';
+$search = $_POST['search'] ?? '';
 
+// Validar que el token no esté vacío
 if (empty($token)) {
     echo json_encode(['status' => false, 'msg' => 'Token no proporcionado.']);
     exit();
 }
 
-// Validar token en la base de datos
-$tokenController = new TokenApiController();
-$tokenData = $tokenController->obtenerTokenPorToken($token);
+// Redirigir la petición al API de Docentes
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, API_DOCENTES_URL . '?' . http_build_query(['action' => $action]));
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['token' => $token, 'search' => $search]));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
 
-if (!$tokenData || $tokenData['estado'] != 1) {
-    echo json_encode(['status' => false, 'msg' => 'Token inválido o inactivo.']);
-    exit();
-}
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
 
-// Procesar acción
-$docenteController = new DocenteController();
-switch ($action) {
-    case 'buscarDocentes':
-        $search = $_POST['search'] ?? '';
-        $docentes = $docenteController->buscarDocentesPorNombreApellido($search);
-        foreach ($docentes as &$docente) {
-            $carrera = $docenteController->obtenerCarreraPorId($docente['id_carrera']);
-            $docente['carrera_nombre'] = $carrera['nombre'] ?? 'Sin carrera';
-            // No ocultar correo ni teléfono
-        }
-        echo json_encode(['status' => true, 'data' => $docentes]);
-        break;
-    default:
-        echo json_encode(['status' => false, 'msg' => 'Acción no válida.']);
+// Devolver la respuesta del API de Docentes
+if ($httpCode === 200) {
+    echo $response;
+} else {
+    echo json_encode(['status' => false, 'msg' => 'Error al conectar con el API de Docentes.']);
 }
 ?>

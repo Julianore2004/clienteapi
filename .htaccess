@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Permitir acceso directo a archivos en /api_cliente/
+    RewriteCond %{REQUEST_URI} ^/api_cliente/ [NC]
+    RewriteRule ^ - [L]
+
+    # Otras reglas de tu aplicación...
+</IfModule>

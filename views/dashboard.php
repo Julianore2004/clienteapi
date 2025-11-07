@@ -116,7 +116,10 @@ require_once __DIR__ . '/include/header.php';
                 <a href="<?php echo BASE_URL; ?>views/tokens_list.php" class="btn btn-primary">
                     <i class="fas fa-key"></i> Mis Tokens API
                 </a>
-                
+                  <!-- ... otros botones ... -->
+       <a href="<?php echo BASE_URL; ?>api_cliente/" class="btn btn-primary" target="_blank">
+    <i class="fas fa-external-link-alt"></i> Probar API Cliente
+</a>
             </div>
         </div>
 
