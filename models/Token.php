@@ -13,24 +13,23 @@ class Token {
 
     // Obtener todos los tokens
     public function obtenerTokens() {
-        $resultado = $this->conexion->query("SELECT id_client_api, token FROM tokens_api");
+        $resultado = $this->conexion->query("SELECT token FROM tokens_api");
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    // Obtener un token por ID
-    public function obtenerTokenPorId($id_client_api) {
-        $stmt = $this->conexion->prepare("SELECT id_client_api, token FROM tokens_api WHERE id_client_api = ?");
-        $stmt->bind_param("i", $id_client_api);
+    // Obtener un token (ahora solo por token, no por ID)
+    public function obtenerTokenPorToken($token) {
+        $stmt = $this->conexion->prepare("SELECT token FROM tokens_api WHERE token = ?");
+        $stmt->bind_param("s", $token);
         $stmt->execute();
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();
     }
 
-    // Actualizar un token
-    public function actualizarToken($id_client_api, $nuevo_token) {
-        $stmt = $this->conexion->prepare("UPDATE tokens_api SET token = ? WHERE id_client_api = ?");
-        $stmt->bind_param("si", $nuevo_token, $id_client_api);
+    // Actualizar un token (ahora solo por token, no por ID)
+    public function actualizarToken($token_viejo, $nuevo_token) {
+        $stmt = $this->conexion->prepare("UPDATE tokens_api SET token = ? WHERE token = ?");
+        $stmt->bind_param("ss", $nuevo_token, $token_viejo);
         return $stmt->execute();
     }
 }
-    

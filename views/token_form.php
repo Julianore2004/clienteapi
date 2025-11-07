@@ -12,22 +12,24 @@ if (!isset($_SESSION['user_id'])) {
 
 $tokenController = new TokenController();
 $token = null;
+$token_value = '';
 
 if (isset($_GET['edit'])) {
-    $id_client_api = $_GET['edit'];
-    $token = $tokenController->obtenerToken($id_client_api);
+    $token_value = $_GET['edit'];
+    $token = $tokenController->obtenerToken($token_value);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_token'])) {
-    $id_client_api = $_POST['id_client_api'];
+    $token_viejo = $_POST['token_viejo'];
     $nuevo_token = $_POST['nuevo_token'];
-    $tokenController->actualizar($id_client_api, $nuevo_token);
+    $tokenController->actualizar($token_viejo, $nuevo_token);
     header('Location: ' . BASE_URL . 'views/tokens_list.php');
     exit();
 }
 
 require_once __DIR__ . '/include/header.php';
 ?>
+
 <style>
     /* Estilos globales */
     .container {
@@ -95,10 +97,10 @@ require_once __DIR__ . '/include/header.php';
     <div class="dashboard-container">
         <h2><i class="fas fa-edit"></i> Actualizar Token</h2>
         <form method="POST" action="">
-            <input type="hidden" name="id_client_api" value="<?php echo $token['id_client_api']; ?>">
+            <input type="hidden" name="token_viejo" value="<?php echo htmlspecialchars($token_value); ?>">
             <div style="margin-bottom: 1rem;">
                 <label for="nuevo_token" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Nuevo Token:</label>
-                <input type="text" id="nuevo_token" name="nuevo_token" value="<?php echo htmlspecialchars($token['token']); ?>" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                <input type="text" id="nuevo_token" name="nuevo_token" value="<?php echo htmlspecialchars($token ? $token['token'] : ''); ?>" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
             </div>
             <button type="submit" name="actualizar_token" class="btn btn-primary">
                 <i class="fas fa-save"></i> Guardar Cambios

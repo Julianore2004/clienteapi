@@ -120,21 +120,21 @@ require_once __DIR__ . '/include/header.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($tokens as $token): ?>
-                    <tr>
-                       
-                        <td>
-                            <code style="font-size: 0.85rem; background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 3px;">
-                                <?php echo substr($token['token'], 0, 20) . '...'; ?>
-                            </code>
-                        </td>
-                        <td>
-                            <a href="<?php echo BASE_URL; ?>views/token_form.php?edit=<?php echo $token['id_client_api']; ?>" class="btn btn-small btn-warning">
-                                <i class="fas fa-edit"></i> Actualizar
-                            </a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+                     <?php foreach ($tokens as $token): ?>
+<tr>
+    <td>
+        <code style="font-size: 0.85rem; background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 3px;">
+            <?php echo substr($token['token'], 0, 20) . '...'; ?>
+        </code>
+    </td>
+    <td>
+        <a href="<?php echo BASE_URL; ?>views/token_form.php?edit=<?php echo urlencode($token['token']); ?>" class="btn btn-small btn-warning">
+            <i class="fas fa-edit"></i> Actualizar
+        </a>
+    </td>
+</tr>
+<?php endforeach; ?>
+
                 </tbody>
             </table>
         </div>

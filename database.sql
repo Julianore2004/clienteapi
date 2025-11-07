@@ -64,43 +64,7 @@ INSERT INTO `usuarios` (`id_usuario`, `username`, `password`, `nombre_completo`,
 (4, 'admin', '$2y$10$a4qsOmIrUcXN4ptudcU57uOQ7li/aLuuuRedYHOb1YoBnoRQsWgPi', 'Administrador General', 'admin', '2025-09-04 16:18:50', '2025-09-04 16:27:16'),
 (5, 'julian', '$2y$10$c4ciki.RcE21wQp3VQp7eOIgSHU6hpTMNhNEUkpDYWF8axQJdfq9.', 'julian', 'admin', '2025-09-08 13:35:39', '2025-09-08 13:35:39');
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `tokens_api`
---
-ALTER TABLE `tokens_api`
-  ADD KEY `id_client_api` (`id_client_api`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `tokens_api`
---
-ALTER TABLE `tokens_api`
-  ADD CONSTRAINT `tokens_api_ibfk_1` FOREIGN KEY (`id_client_api`) REFERENCES `client_api` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

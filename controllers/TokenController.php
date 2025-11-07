@@ -14,13 +14,13 @@ class TokenController {
         return $this->tokenModel->obtenerTokens();
     }
 
-    // Obtener un token por ID
-    public function obtenerToken($id_client_api) {
-        return $this->tokenModel->obtenerTokenPorId($id_client_api);
+    // Obtener un token por token
+    public function obtenerToken($token) {
+        return $this->tokenModel->obtenerTokenPorToken($token);
     }
 
     // Actualizar un token
-    public function actualizar($id_client_api, $nuevo_token) {
-        return $this->tokenModel->actualizarToken($id_client_api, $nuevo_token);
+    public function actualizar($token_viejo, $nuevo_token) {
+        return $this->tokenModel->actualizarToken($token_viejo, $nuevo_token);
     }
 }
