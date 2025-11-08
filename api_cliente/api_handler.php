@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // URL del API de Docentes (cambia por la URL real de tu API de Docentes)
-define('API_DOCENTES_URL', 'https://apidocentes.404brothers.com.pe/api_cliente/api_handler.php');
+define('API_DOCENTES_URL', 'https://apidocentes.404brothers.com.pe/api_handler.php');
 
 // Obtener el token y la acción
 $token = $_POST['token'] ?? '';
