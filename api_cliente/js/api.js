@@ -4,7 +4,12 @@ async function buscarDocentes() {
     const resultadosDiv = document.getElementById('resultados');
 
     if (!search.trim()) {
-        alert('Ingrese un nombre o apellido para buscar.');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'Ingrese un nombre o apellido para buscar.',
+            confirmButtonColor: '#667eea'
+        });
         return;
     }
 
@@ -27,11 +32,13 @@ async function buscarDocentes() {
         const data = await response.json();
 
         if (!data.status) {
-            resultadosDiv.innerHTML = `
-                <div class="error">
-                    <i class="fas fa-exclamation-triangle"></i> ${data.msg}
-                </div>
-            `;
+            Swal.fire({
+                icon: data.type || 'error',
+                title: data.type === 'error' ? 'Error' : 'Advertencia',
+                text: data.msg,
+                confirmButtonColor: '#667eea'
+            });
+            resultadosDiv.innerHTML = '';
             return;
         }
 
@@ -66,10 +73,12 @@ async function buscarDocentes() {
 
     } catch (error) {
         console.error('Error:', error);
-        resultadosDiv.innerHTML = `
-            <div class="error">
-                <i class="fas fa-times-circle"></i> Error al conectar con el servidor.
-            </div>
-        `;
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ocurrió un error al buscar los docentes.',
+            confirmButtonColor: '#667eea'
+        });
+        resultadosDiv.innerHTML = '';
     }
 }

@@ -11,7 +11,11 @@ $search = $_POST['search'] ?? '';
 
 // Validar que el token no esté vacío
 if (empty($token)) {
-    echo json_encode(['status' => false, 'msg' => 'Token no proporcionado.']);
+    echo json_encode([
+        'status' => false,
+        'type' => 'error',
+        'msg' => 'Token no proporcionado.'
+    ]);
     exit();
 }
 
@@ -31,6 +35,11 @@ curl_close($ch);
 if ($httpCode === 200) {
     echo $response;
 } else {
-    echo json_encode(['status' => false, 'msg' => 'Error al conectar con el API de Docentes.']);
+    echo json_encode([
+        'status' => false,
+        'type' => 'error',
+        'msg' => 'Error al conectar con el API de Docentes.'
+    ]);
 }
 ?>
+
