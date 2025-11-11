@@ -23,4 +23,8 @@ class TokenController {
     public function actualizar($token_viejo, $nuevo_token) {
         return $this->tokenModel->actualizarToken($token_viejo, $nuevo_token);
     }
+    // Validar token en la base de datos local
+    public function validarTokenLocal($token) {
+        return $this->tokenModel->validarTokenLocal($token);
+    }
 }

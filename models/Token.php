@@ -17,19 +17,32 @@ class Token {
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    // Obtener un token (ahora solo por token, no por ID)
+    // Obtener un token por su valor
     public function obtenerTokenPorToken($token) {
-        $stmt = $this->conexion->prepare("SELECT token FROM tokens_api WHERE token = ?");
+        $stmt = $this->conexion->prepare("SELECT token, estado FROM tokens_api WHERE token = ?");
         $stmt->bind_param("s", $token);
         $stmt->execute();
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();
     }
 
-    // Actualizar un token (ahora solo por token, no por ID)
+    // Actualizar un token
     public function actualizarToken($token_viejo, $nuevo_token) {
         $stmt = $this->conexion->prepare("UPDATE tokens_api SET token = ? WHERE token = ?");
         $stmt->bind_param("ss", $nuevo_token, $token_viejo);
         return $stmt->execute();
     }
+
+    // Validar token en la base de datos local
+    public function validarTokenLocal($token) {
+        $tokenData = $this->obtenerTokenPorToken($token);
+        if (!$tokenData) {
+            return ['status' => false, 'msg' => 'Token no encontrado en la base de datos local.'];
+        }
+        if ($tokenData['estado'] != 1) {
+            return ['status' => false, 'msg' => 'Token inactivo en la base de datos local.'];
+        }
+        return ['status' => true, 'msg' => 'Token válido en la base de datos local.'];
+    }
 }
+?>

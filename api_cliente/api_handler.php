@@ -1,7 +1,8 @@
 <?php
 header('Content-Type: application/json');
+require_once __DIR__ . '/../controllers/TokenController.php';
 
-// URL del API de Docentes (cambia por la URL real de tu API de Docentes)
+// URL del API de Docentes
 define('API_DOCENTES_URL', 'https://apidocentes.404brothers.com.pe/api_handler.php');
 
 // Obtener el token y la acción
@@ -15,6 +16,19 @@ if (empty($token)) {
         'status' => false,
         'type' => 'error',
         'msg' => 'Token no proporcionado.'
+    ]);
+    exit();
+}
+
+// Validar el token en la base de datos local
+$tokenController = new TokenController();
+$validacionLocal = $tokenController->validarTokenLocal($token);
+
+if (!$validacionLocal['status']) {
+    echo json_encode([
+        'status' => false,
+        'type' => 'error',
+        'msg' => $validacionLocal['msg']
     ]);
     exit();
 }
@@ -42,4 +56,3 @@ if ($httpCode === 200) {
     ]);
 }
 ?>
-
